@@ -1,14 +1,11 @@
-import { createStore } from 'vuex'
+import { createStore } from "vuex";
+import sessionManager from "@/store/modules/session_manager.js";
 
 export default createStore({
-  state: {
-  },
-  getters: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
+  state: {},
+  mutations: {},
+  actions: {},
   modules: {
-  }
-})
+    sessionManager,
+  },
+});
