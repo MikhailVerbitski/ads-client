@@ -2,7 +2,6 @@ import { createApp } from 'vue'
 import store from "./store";
 
 import components from '@/components/UI'
-// import Posts from './Posts'
 import App from './App'
 
 // Load JWT from Local Storage on Refresh.

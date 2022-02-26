@@ -1,13 +1,15 @@
 <template>
+  <Navbar />
   <SessionManager />
 </template>
 
 <script>
 import SessionManager from "./components/SessionManager.vue";
+import Navbar from "./components/Navbar.vue";
 export default {
   name: "App",
   components: {
-    SessionManager,
+    SessionManager, Navbar
   },
 };
 </script>
