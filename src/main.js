@@ -1,8 +1,11 @@
-import { createApp } from 'vue'
-import store from "./store";
+import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap/dist/js/bootstrap.js"
 
 import components from '@/components/UI'
+
+import { createApp } from 'vue'
 import App from './App'
+import store from "./store"
 
 // Load JWT from Local Storage on Refresh.
 let localAuthToken = localStorage.auth_token;
