@@ -1,39 +1,57 @@
 <template>
   <div>
-    <div>
-      <!-- <p>Id: {{post.id}}</p> -->
-      <img />
+    <div class="container_img shadow card-overlay rounded">
+      <img v-bind:src="findImage()" />
       <a @click="$router.push(`/posts/${post.id}`)">
-        <span class="overlay-text">{{post.body}}</span>
+        <span class="centered overlay-text">{{post.body}}</span>
       </a>
     </div>
-    <!-- <div>
-      <my-button @click="this.$emit('delete', this)">Delete</my-button>
-    </div> -->
   </div>
 </template>
 
 <script>
-  export default {
-    props: {
-      post: {
-        type: Object,
-        required: true
-      }
-    },
-    methods: {
+export default {
+  props: {
+    post: {
+      type: Object,
+      required: true
     }
-  }
+  },
+  methods: {
+    findImage() {
+      const arr = this.post.body.match(/(http[^"]+(png|jpg|"))/i)
+      const src = arr && arr[0]
+      console.log(src);
+      return src
+    }
+  },
+  // created() {
+  //   console.log(this.findImage());
+  // }
+}
 </script>
 
 <style scoped>
-.overlay-text {
-  padding: 140px 10px;
-  text-shadow: 0 4px 8px black;
-  font-size: 1.3em;
-  line-height: 30px;
+.card-overlay {
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.6),
+    rgba(0, 0, 0, 1)
+  );
 }
-.overlay-text * {
-  color: white !important;
+div img {
+  width: 100%;
+  opacity: 0.4;
+}
+
+.container_img {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 </style>

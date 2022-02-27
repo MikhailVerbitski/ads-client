@@ -1,11 +1,6 @@
 <template>
-  <div>
-    <div class="wrapper" v-if="posts.length > 0">
-      <post-item class="shadow card-overlay rounded" :post="post" :key="post.id" v-for="post in posts"/>
-    </div>
-    <h2 v-else>
-      There are no posts
-    </h2>
+  <div class="wrapper">
+    <post-item class="shadow card-overlay rounded" :post="post" :key="post.id" v-for="post in posts"/>
   </div>
 </template>
 

@@ -6,13 +6,11 @@
 </template>
 
 <script>
-import SessionManager from "./components/SessionManager.vue";
-import Posts from "./posts/Posts.vue";
 import Navbar from "./components/Navbar.vue";
 export default {
   name: "App",
   components: {
-    SessionManager, Navbar, Posts
+    Navbar
   },
 };
 </script>

@@ -9,6 +9,15 @@ import directives from '@/directives';
 import 'gitart-vue-dialog/dist/style.css'
 import { GDialog } from 'gitart-vue-dialog'
 import { plugin as dialogPlugin } from 'gitart-vue-dialog'
+// vue-markdown-editor
+import VMdEditor from '@kangc/v-md-editor';
+import '@kangc/v-md-editor/lib/style/base-editor.css';
+import vuepressTheme from '@kangc/v-md-editor/lib/theme/vuepress.js';
+import '@kangc/v-md-editor/lib/theme/style/vuepress.css';
+import Prism from 'prismjs';
+import 'prismjs/components/prism-json';
+import enUS from '@kangc/v-md-editor/lib/lang/en-US';
+VMdEditor.lang.use('en-US', enUS);
 
 import { createApp } from 'vue'
 import App from '@/App'
@@ -26,7 +35,11 @@ if (cookieExists) {
   }
 }
 
-const app = createApp(App).use(store).use(router).use(dialogPlugin)
+VMdEditor.use(vuepressTheme, {
+  Prism,
+});
+
+const app = createApp(App).use(store).use(router).use(dialogPlugin).use(VMdEditor);
 app.component('GDialog', GDialog)
 components.forEach(component => app.component(component.name, component))
 directives.forEach(directive => app.directive(directive.name, directive))

@@ -1,7 +1,7 @@
 import {createRouter, createWebHistory} from "vue-router";
 import Posts from '@/posts/Posts'
 import PostPage from '@/posts/PostPage'
-import PostCreate from '@/posts/PostCreate'
+import PostCreatePage from '@/posts/PostCreatePage'
 import SessionManager from "@/components/SessionManager";
 import SignUpPage from "@/users/SignUpPage";
 import SignInPage from "@/users/SignInPage";
@@ -25,8 +25,8 @@ const routes = [
     component: PostPage
   },
   {
-    path: '/post_create',
-    component: PostCreate
+    path: '/newPost',
+    component: PostCreatePage
   },
   {
     path: '/SessionManager',

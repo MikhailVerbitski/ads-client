@@ -1,35 +1,33 @@
 <template>
-    <div>
-      <h3>Create new post</h3>
-      <form @submit.prevent>
-        <input v-model="post.content" @input="post.content = $event.target.value" type="text" placeholder="Content"/>
-        <my-button @click="createNewPost">Create</my-button>
-      </form>
-    </div>
+  <div>
+    <h3>Create new post</h3>
+    <form @submit.prevent>
+      <v-md-editor v-model="post.body" height="400px"></v-md-editor>
+      <my-button @click="createNewPostWrapper">Create</my-button>
+    </form>
+  </div>
 </template>
 
 <script>
-  export default {
-    name: 'PostCreate',
-    data() {
-      return {
-        post: {
-          id: null,
-          content: '',
-        }
-      }
-    },
-    methods: {
-      createNewPost() {
-        this.post.id = Date.now()
-        this.$emit('create', this.post)
-        this.post = {
-          id: null,
-          content: '',
-        }
+import { mapActions } from "vuex";
+export default {
+  name: 'PostCreate',
+  data() {
+    return {
+      post: {
+        body: '',
       }
     }
+  },
+  methods: {
+    ...mapActions(["createNewPost"]),
+    createNewPostWrapper() {
+      this.createNewPost(this.post);
+      this.$router.push('/');
+      this.$emit('submit');
+    }
   }
+}
 </script>
 
 <style scoped>

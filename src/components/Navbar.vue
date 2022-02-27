@@ -8,14 +8,13 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
+          <li v-if="isLoggedIn" class="nav-item">
             <a class="nav-link active" @click="showDialog" aria-current="page" href="#">Create new Post!</a>
           </li>
         </ul>
 
-
-        <GDialog v-model="dialogVisible">
-          <PostCreate @create="createPost"/>
+        <GDialog v-model="dialogCreatePostVisible">
+          <PostCreate @create="createPost" @submit="hideDialog"/>
         </GDialog>
 
 				<label class="switch">
@@ -74,7 +73,7 @@ export default {
   },
   data() {
     return {
-      dialogVisible: false,
+      dialogCreatePostVisible: false,
       dialogLoginVisible: false,
       dialogRegistrationVisible: false,
     }
@@ -84,12 +83,11 @@ export default {
   },
 	methods: {
     ...mapActions(["logoutUser"]),
-    createPost(post) {
-      this.posts.push(post);
-      this.dialogVisible = false;
+    hideDialog() {
+      this.dialogCreatePostVisible = false;
     },
     showDialog() {
-      this.dialogVisible = true;
+      this.dialogCreatePostVisible = true;
     },
 	},
 }

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:3000/";
+const BASE_URL = "http://localhost:3000";
 
 const state = {
   auth_token: null,
@@ -8,6 +8,7 @@ const state = {
     id: null,
     username: null,
     email: null,
+    role: null
   },
 };
 const getters = {
@@ -20,6 +21,9 @@ const getters = {
   getUserID(state) {
     return state.user?.id;
   },
+  getUserRole(state) {
+    return state.user?.role;
+  },
   isLoggedIn(state) {
     const loggedOut =
       state.auth_token == null || state.auth_token == JSON.stringify(null);
@@ -30,7 +34,7 @@ const actions = {
   registerUser({ commit }, payload) {
     return new Promise((resolve, reject) => {
       axios
-        .post(`${BASE_URL}users`, payload)
+        .post(`${BASE_URL}/users`, payload)
         .then((response) => {
           commit("setUserInfo", response);
           resolve(response);
@@ -43,7 +47,7 @@ const actions = {
   loginUser({ commit }, payload) {
     new Promise((resolve, reject) => {
       axios
-        .post(`${BASE_URL}users/sign_in`, payload)
+        .post(`${BASE_URL}/users/sign_in`, payload)
         .then((response) => {
           commit("setUserInfo", response);
           resolve(response);
@@ -61,7 +65,7 @@ const actions = {
     };
     new Promise((resolve, reject) => {
       axios
-        .delete(`${BASE_URL}users/sign_out`, config)
+        .delete(`${BASE_URL}/users/sign_out`, config)
         .then(() => {
           commit("resetUserInfo");
           resolve();
@@ -79,7 +83,7 @@ const actions = {
     };
     new Promise((resolve, reject) => {
       axios
-        .get(`${BASE_URL}api/v1/users/show`, config)
+        .get(`${BASE_URL}/api/v1/users/show`, config)
         .then((response) => {
           if (response.data.user) {
             commit("setUserInfoFromToken", response);
@@ -111,6 +115,7 @@ const mutations = {
       id: null,
       username: null,
       email: null,
+      role: null,
     };
     state.auth_token = null;
     localStorage.removeItem("auth_token");

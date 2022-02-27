@@ -19,9 +19,6 @@ export default {
   },
   methods: {
     ...mapActions(["loadPosts"]),
-    deletePost(post) {
-      this.posts = this.posts.filter(p => p.id != post.id);
-    },
   },
 }
 </script>
