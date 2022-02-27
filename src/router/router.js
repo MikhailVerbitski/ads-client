@@ -1,9 +1,10 @@
 import {createRouter, createWebHistory} from "vue-router";
 import Posts from '@/posts/Posts'
 import PostPage from '@/posts/PostPage'
+import PostCreate from '@/posts/PostCreate'
 import SessionManager from "@/components/SessionManager";
-import SignUp from "@/users/SignUp";
-import SignIn from "@/users/SignIn";
+import SignUpPage from "@/users/SignUpPage";
+import SignInPage from "@/users/SignInPage";
 import UserProfile from "@/users/UserProfile";
 
 const routes = [
@@ -13,15 +14,19 @@ const routes = [
   },
   {
     path: '/sign_in',
-    component: SignIn
+    component: SignInPage
   },
   {
     path: '/sign_up',
-    component: SignUp
+    component: SignUpPage
   },
   {
     path: '/post/:id',
     component: PostPage
+  },
+  {
+    path: '/post_create',
+    component: PostCreate
   },
   {
     path: '/SessionManager',

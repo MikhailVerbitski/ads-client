@@ -13,9 +13,10 @@
           </li>
         </ul>
 
-        <my-dialog v-model:show="dialogVisible">
-          <post-form @create="createPost"/>
-        </my-dialog>
+
+        <GDialog v-model="dialogVisible">
+          <PostCreate @create="createPost"/>
+        </GDialog>
 
 				<label class="switch">
 					<input id="slider" @change="$store.commit('changeTheme')" type="checkbox">
@@ -38,8 +39,17 @@
           </ul>
 
           <ul v-else class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-            <li><router-link class="dropdown-item" to="/sign_in">Login</router-link></li>
-            <li><router-link class="dropdown-item" to="/sign_up">Registration</router-link></li>
+            <!-- <li><router-link class="dropdown-item" to="/sign_in">Login</router-link></li> -->
+            <li><button class="dropdown-item" @click="dialogLoginVisible = true">Login</button></li>
+            <GDialog v-model="dialogLoginVisible" transition="custom-from-bottom-transition" max-width="70%">
+              <SingIn />
+            </GDialog>
+
+            <!-- <li><router-link class="dropdown-item" to="/sign_up">Registration</router-link></li> -->
+            <li><button class="dropdown-item" @click="dialogRegistrationVisible = true">Registration</button></li>
+            <GDialog v-model="dialogRegistrationVisible" transition="custom-from-bottom-transition" max-width="70%">
+              <SignUp />
+            </GDialog>
           </ul>
 
         </ul>
@@ -50,16 +60,23 @@
 
 <script>
 import "@/store/index.js";
-import PostForm from "@/posts/PostForm.vue";
+import PostCreate from "@/posts/PostCreate";
 import { mapActions, mapGetters } from "vuex";
+import { GDialog } from 'gitart-vue-dialog'
+
+import SingIn from "@/users/SignIn"
+import SignUp from "@/users/SignUp"
+
 export default {
 	name: "Navbar",
   components: {
-    PostForm
+    PostCreate, GDialog, SingIn, SignUp
   },
   data() {
     return {
       dialogVisible: false,
+      dialogLoginVisible: false,
+      dialogRegistrationVisible: false,
     }
   },
   computed: {
@@ -78,7 +95,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 .navbar-margins {
   margin-bottom: 2%;
 }
@@ -206,5 +223,18 @@ input:checked + .slider:before {
 }
 .slider.round:before {
   border-radius: 50%;
+}
+
+
+.custom-from-bottom-transition {
+  &-enter-from {
+    transform: translate(0, 100%);
+    opacity: 0;
+  }
+
+  &-leave-to {
+    transform: translate(0, -30%);
+    opacity: 0;
+  }
 }
 </style>

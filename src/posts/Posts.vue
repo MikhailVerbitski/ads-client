@@ -9,11 +9,10 @@
 <script>
 import "@/store/index.js";
 import { mapActions, mapGetters } from "vuex";
-import PostForm from "@/posts/PostForm.vue";
 import PostList from "@/posts/PostList.vue";
 export default {
   components: {
-    PostList, PostForm
+    PostList
   },
   computed: {
     ...mapGetters(["getPostList", "isPostListLoaded"]),

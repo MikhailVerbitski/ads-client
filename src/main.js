@@ -5,6 +5,10 @@ import "bootstrap/dist/js/bootstrap.js"
 import components from '@/components/UI'
 // import directives
 import directives from '@/directives';
+// GDialog
+import 'gitart-vue-dialog/dist/style.css'
+import { GDialog } from 'gitart-vue-dialog'
+import { plugin as dialogPlugin } from 'gitart-vue-dialog'
 
 import { createApp } from 'vue'
 import App from '@/App'
@@ -22,7 +26,8 @@ if (cookieExists) {
   }
 }
 
-const app = createApp(App).use(store).use(router)
+const app = createApp(App).use(store).use(router).use(dialogPlugin)
+app.component('GDialog', GDialog)
 components.forEach(component => app.component(component.name, component))
 directives.forEach(directive => app.directive(directive.name, directive))
 app.mount('#app')

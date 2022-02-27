@@ -10,6 +10,7 @@
 
 <script>
   export default {
+    name: 'PostCreate',
     data() {
       return {
         post: {

@@ -81,7 +81,11 @@ const actions = {
       axios
         .get(`${BASE_URL}api/v1/users/show`, config)
         .then((response) => {
-          commit("setUserInfoFromToken", response);
+          if (response.data.user) {
+            commit("setUserInfoFromToken", response);
+          } else {
+            commit("resetUserInfo");
+          }
           resolve(response);
         })
         .catch((error) => {
