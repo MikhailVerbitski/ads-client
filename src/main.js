@@ -1,11 +1,15 @@
+// Bootstrap
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap/dist/js/bootstrap.js"
-
+// import components
 import components from '@/components/UI'
+// import directives
+import directives from '@/directives';
 
 import { createApp } from 'vue'
-import App from './App'
-import store from "./store"
+import App from '@/App'
+import store from "@/store"
+import router from "@/router/router"
 
 // Load JWT from Local Storage on Refresh.
 let localAuthToken = localStorage.auth_token;
@@ -18,6 +22,7 @@ if (cookieExists) {
   }
 }
 
-const app = createApp(App).use(store)
+const app = createApp(App).use(store).use(router)
 components.forEach(component => app.component(component.name, component))
+directives.forEach(directive => app.directive(directive.name, directive))
 app.mount('#app')

@@ -79,7 +79,7 @@ const actions = {
     };
     new Promise((resolve, reject) => {
       axios
-        .get(`${BASE_URL}member-data`, config)
+        .get(`${BASE_URL}api/v1/users/show`, config)
         .then((response) => {
           commit("setUserInfoFromToken", response);
           resolve(response);
@@ -100,6 +100,7 @@ const mutations = {
   setUserInfoFromToken(state, data) {
     state.user = data.data.user;
     state.auth_token = localStorage.getItem("auth_token");
+    axios.defaults.headers.common["Authorization"] = localStorage.getItem("auth_token");
   },
   resetUserInfo(state) {
     state.user = {
