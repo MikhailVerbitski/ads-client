@@ -2,8 +2,10 @@
   <div>
     <div class="container_img shadow card-overlay rounded">
       <img v-bind:src="findImage()" />
-      <a @click="$router.push(`/posts/${post.id}`)">
-        <span class="centered overlay-text">{{post.body}}</span>
+      <a @click="$router.push(`/post/${post.id}`)">
+        <span class="centered overlay-text">
+          {{ findTitle() }}
+        </span>
       </a>
     </div>
   </div>
@@ -19,15 +21,16 @@ export default {
   },
   methods: {
     findImage() {
-      const arr = this.post.body.match(/(http[^"]+(png|jpg|"))/i)
+      const arr = this.post.body.match(/http[^"\s\)]+/g).filter(u => !u.match(/github/))
       const src = arr && arr[0]
-      console.log(src);
       return src
+    },
+    findTitle() {
+      const arr = /[#]+\s([^\n]+)/.exec(this.post.body)
+      const title = arr && arr[1]
+      return title
     }
   },
-  // created() {
-  //   console.log(this.findImage());
-  // }
 }
 </script>
 
@@ -40,7 +43,7 @@ export default {
 }
 div img {
   width: 100%;
-  opacity: 0.4;
+  opacity: 0.6;
 }
 
 .container_img {

@@ -20,6 +20,9 @@ export default {
   methods: {
     ...mapActions(["loadPosts"]),
   },
+  created() {
+    this.loadPosts();
+  },
 }
 </script>
 

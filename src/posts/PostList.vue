@@ -33,10 +33,6 @@
   position: relative;
   overflow: hidden;
 }
-.wrapper div img {
-  width: 100%;
-  opacity: 0.4;
-}
 .wrapper div img, .overlay-text {
   position: absolute;
 }

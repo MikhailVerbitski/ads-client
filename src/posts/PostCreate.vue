@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="editor second-color">
     <h3>Create new post</h3>
     <form @submit.prevent>
       <v-md-editor v-model="post.body" height="400px"></v-md-editor>
@@ -20,15 +20,22 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["createNewPost"]),
+    ...mapActions(["createNewPost", "loadPosts"]),
     createNewPostWrapper() {
       this.createNewPost(this.post);
-      this.$router.push('/');
+      // this.$router.push('/');
       this.$emit('submit');
+      // this.loadPosts();
     }
   }
 }
 </script>
 
 <style scoped>
+.editor {
+  padding: 2%;
+}
+.editor .vuepress-markdown-body {
+  color: #2c3e50 !important;
+}
 </style>

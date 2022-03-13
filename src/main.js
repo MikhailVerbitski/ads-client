@@ -1,3 +1,5 @@
+// main styles
+import './main.css';
 // Bootstrap
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap/dist/js/bootstrap.js"
@@ -18,6 +20,9 @@ import Prism from 'prismjs';
 import 'prismjs/components/prism-json';
 import enUS from '@kangc/v-md-editor/lib/lang/en-US';
 VMdEditor.lang.use('en-US', enUS);
+// vue3-markdown-it
+import Markdown from 'vue3-markdown-it';
+import 'highlight.js/styles/monokai.css';
 
 import { createApp } from 'vue'
 import App from '@/App'
@@ -39,7 +44,7 @@ VMdEditor.use(vuepressTheme, {
   Prism,
 });
 
-const app = createApp(App).use(store).use(router).use(dialogPlugin).use(VMdEditor);
+const app = createApp(App).use(store).use(router).use(dialogPlugin).use(VMdEditor).use(Markdown);
 app.component('GDialog', GDialog)
 components.forEach(component => app.component(component.name, component))
 directives.forEach(directive => app.directive(directive.name, directive))

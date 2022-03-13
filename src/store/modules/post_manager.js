@@ -11,18 +11,10 @@ const state = {
   },
 };
 const getters = {
-  getPostList(state) {
-    return state.post_list || [];
-  },
-  getPostListRequestParams(state) {
-    return state.post_list_request_params;
-  },
-  isDialogCreatePostShowed(state) {
-    return state.dialog_create_post_showed;
-  },
-  isPostListLoaded(state) {
-    return state.post_list && state.post_list.length > 0
-  }
+  getPostList:              (state) => state.post_list || [],
+  getPostListRequestParams: (state) => state.post_list_request_params,
+  isDialogCreatePostShowed: (state) => state.dialog_create_post_showed,
+  isPostListLoaded:         (state) => state.post_list && state.post_list.length > 0,
 };
 const actions = {
   loadPosts({ commit, getters }) {
@@ -49,7 +41,6 @@ const actions = {
       axios
         .post(`${BASE_URL}/api/v1/posts`, post)
         .then((response) => {
-          dispatch('loadPosts')
           resolve(response);
         })
         .catch((error) => {
@@ -61,7 +52,7 @@ const actions = {
 const mutations = {
   setPostsInfo(state, data) {
     state.post_list = data.data.records;
-    state.post_list_request_params.page += 1;
+    // state.post_list_request_params.page += 1;
   },
   switchDialogCreatePost(state, new_state) {
     state.dialog_create_post_showed = new_state;
