@@ -14,7 +14,7 @@
                     </thead>
                     <tbody>
                     <tr class="table-rows">
-                        <th class="table-row">[{{ this.getUserID }}]</th>
+                        <th class="table-row">{{ this.getUserID }}</th>
                         <td class="table-row table-row-username">{{ this.getUserEmail }}</td>
                         <td class="table-row">{{ this.getAuthToken }}</td>
                     </tr>

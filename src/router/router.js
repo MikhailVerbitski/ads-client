@@ -5,7 +5,7 @@ import PostCreatePage from '@/posts/PostCreatePage'
 import SessionManager from "@/components/SessionManager";
 import SignUpPage from "@/users/SignUpPage";
 import SignInPage from "@/users/SignInPage";
-import UserProfile from "@/users/UserProfile";
+import UserProfilePage from "@/users/UserProfilePage";
 
 const routes = [
   {
@@ -34,7 +34,7 @@ const routes = [
   },
   {
     path: '/user_profile',
-    component: UserProfile
+    component: UserProfilePage
   },
 ]
 

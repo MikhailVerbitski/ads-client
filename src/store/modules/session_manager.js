@@ -6,9 +6,17 @@ const state = {
   auth_token: null,
   user: {
     id: null,
-    username: null,
+    first_name: null,
+    second_name: null,
     email: null,
-    role: null
+    phone: null,
+    address: null,
+    build: null,
+    apartment: null,
+    post_code: null,
+    country: null,
+    city: null,
+    role: null,
   },
 };
 const getters = {
@@ -23,6 +31,9 @@ const getters = {
   },
   getUserRole(state) {
     return state.user?.role;
+  },
+  getUserAttrs(state) {
+    return state.user;
   },
   isLoggedIn(state) {
     const loggedOut =
@@ -97,6 +108,25 @@ const actions = {
         });
     });
   },
+  updateUserProfile({ commit, state }, new_user_data) {
+    const config = {
+      headers: {
+        Authorization: state.auth_token,
+      },
+      user: new_user_data,
+    };
+    new Promise((resolve, reject) => {
+      axios
+        .put(`${BASE_URL}/api/v1/users/${state.user.id}`, config)
+        .then((response) => {
+          commit("setUserInfoFromToken", response);
+          resolve(response);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  },
 };
 const mutations = {
   setUserInfo(state, data) {
@@ -111,12 +141,7 @@ const mutations = {
     axios.defaults.headers.common["Authorization"] = localStorage.getItem("auth_token");
   },
   resetUserInfo(state) {
-    state.user = {
-      id: null,
-      username: null,
-      email: null,
-      role: null,
-    };
+    Object.keys(state.user).forEach(k => state.user[k] = null);
     state.auth_token = null;
     localStorage.removeItem("auth_token");
     axios.defaults.headers.common["Authorization"] = null;
